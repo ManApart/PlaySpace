@@ -1,0 +1,55 @@
+.title{
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.other-thing{
+	   -fx-font-size: 32px;
+}
+
+.button-tile{
+  -fx-background-color: transparent;
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: contain;
+  -fx-pref-width: 48px;
+  -fx-pref-height: 48px;
+}
+
+.button-blocked{
+	-fx-background-image: url('../images/tiles/blocked.png');
+}
+
+.button-empty{
+	-fx-background-image: url('../images/tiles/empty.png');
+}
+
+.button-full{
+	-fx-background-image: url('../images/tiles/full.png');
+}
+
+.button-engine{
+	-fx-background-image: url('../images/tiles/engine.png');
+}
+
+.button-wire-off{
+	-fx-background-image: url('../images/tiles/wireOff.png');
+}
+
+.button-wire-on{
+	-fx-background-image: url('../images/tiles/wireOn.png');
+}
+
+.button-station-off{
+	-fx-background-image: url('../images/tiles/stationOff.png');
+}
+
+.button-station-on{
+	-fx-background-image: url('../images/tiles/stationOn.png');
+}
+
+
+.tile-grid{
+	-fx-hgap: 0;
+	-fx-vgap: 0;
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane hgap="10.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/MainMenu.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="rak.playspace.controllers.ToolboxController">
+	<columnConstraints>
+		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="635.0" minWidth="10.0" prefWidth="534.0" />
+		<ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+	</columnConstraints>
+	<children>
+		<Label text="Toolkit" />
+		<GridPane GridPane.rowIndex="1">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<children>
+				<Label fx:id="currentTool" text="Empty" GridPane.columnIndex="1" />
+				<Label text="Current Tool:" />
+			</children>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" />
+			</rowConstraints>
+		</GridPane>
+		<FlowPane fx:id="flowPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+			<children>
+			</children>
+		</FlowPane>
+	</children>
+	<padding>
+		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+	</padding>
+	<rowConstraints>
+		<RowConstraints />
+		<RowConstraints />
+		<RowConstraints />
+	</rowConstraints>
+</GridPane>
