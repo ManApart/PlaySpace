@@ -25,7 +25,7 @@ public class PlaySpaceTestApplication extends Application {
 		PlaySpaceTestApplication.primaryStage = primaryStage;
 		
         primaryStage.setTitle("Playspace Tester");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images//Logo Icon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/Logo Icon.png")));
         setScene(MAIN_MENU);
         primaryStage.show();
 	}
