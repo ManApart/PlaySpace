@@ -2,7 +2,7 @@ package rak.playspace.power;
 
 import rak.utility.grid.PathingType;
 
-public class Wire extends PoweredComponent {
+public class Wire extends PoweredComponent implements Item{
 	private boolean isOpen = true;
 	private float conductivity = 1;
 	

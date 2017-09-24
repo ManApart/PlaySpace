@@ -20,7 +20,6 @@ public class EmptyTool implements Tool {
 			tile.getAtmosphere().setValidForPathing(true);
 			tile.getAtmosphere().setLevel(0);
 		}
-		tile.setWire(null);
 		tile.setItem(null);
 	}
 	

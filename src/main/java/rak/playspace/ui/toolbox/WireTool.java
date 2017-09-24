@@ -18,8 +18,7 @@ public class WireTool implements Tool {
 	@Override
 	public void use(int x, int y) {
 		Tile tile = gridViewHelper.getTileAt(x, y);
-		tile.setWire(new Wire(50));
-		tile.setItem(null);
+		tile.setItem(new Wire(50));
 		gridViewHelper.needsInitialized();
 	}
 	

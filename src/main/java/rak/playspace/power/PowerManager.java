@@ -48,8 +48,6 @@ public class PowerManager implements FlowManager{
 			Tile tile = square.getItem();
 			if (hasPoweredItem(tile)){
 				grid.setAt((PoweredComponent) tile.getItem(), square.getX(), square.getY());
-			} else {
-				grid.setAt(tile.getWire(), square.getX(), square.getY());
 			}
 		}
 		grid.refreshMaps();

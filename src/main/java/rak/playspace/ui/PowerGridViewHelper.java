@@ -11,6 +11,7 @@ import rak.playspace.power.Item;
 import rak.playspace.power.PowerManager;
 import rak.playspace.power.PoweredComponent;
 import rak.playspace.power.Station;
+import rak.playspace.power.Wire;
 import rak.playspace.tileSetup.TileSetupHelper;
 import rak.playspace.ui.toolbox.EmptyTool;
 import rak.playspace.ui.toolbox.EngineTool;
@@ -54,8 +55,8 @@ public class PowerGridViewHelper extends GridViewHelper{
 	}
 
 	private void resetWirePower(Tile tile) {
-		if (tile.getWire() != null){
-			tile.getWire().setPowerLevel(0);
+		if (tile.getItem() != null && tile.getItem() instanceof Wire){
+			((Wire) tile.getItem()).setPowerLevel(0);
 		}
 	}
 
@@ -73,7 +74,7 @@ public class PowerGridViewHelper extends GridViewHelper{
 			} else {
 				button.getStyleClass().add(CSS.BUTTON_STATION_OFF);
 			}
-		} else if (tile.getWire() != null){
+		} else if (tile.getItem() instanceof Wire){
 			if (level >= 50){
 				button.getStyleClass().add(CSS.BUTTON_WIRE_ON);
 			} else {
