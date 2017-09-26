@@ -6,8 +6,13 @@ import spock.lang.Specification
 class ItemShapeSpec extends Specification {
 	
 	def "determine shape calculates properly"(ItemShape expected, int contiguousSides, boolean isCorner){
-		expect:
-			assert expected == ItemShape.determineShape(contiguousSides, isCorner) 
+		given:
+			ConnectedNeighbors neighbors = Mock()
+		when:
+			neighbors.getNumberOfConnectedNeighbors() >> contiguousSides
+			neighbors.isCorner() >> isCorner
+		then:
+			assert expected == ItemShape.determineShape(neighbors) 
 		where:
 			expected				|	contiguousSides	|	isCorner
 			ItemShape.ALL_EDGE		|	0				|	true

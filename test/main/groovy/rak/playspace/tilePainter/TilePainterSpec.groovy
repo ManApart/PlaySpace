@@ -4,59 +4,73 @@ import rak.playspace.model.Tile
 import rak.playspace.ui.tilePainter.ItemShape
 import rak.playspace.ui.tilePainter.TilePainter
 import rak.utility.grid.Grid
+import rak.utility.grid.GridDirection
 import rak.utility.grid.GridHelper
 import spock.lang.Specification
 
 class TilePainterSpec extends Specification {
 
-	//Shortcut variables for easier reading
-	private static final TestTileType x = TestTileType.ITEM;
-	private static final TestTileType o = TestTileType.NULL;
-	
-	private static final TestTileType[][] NO_EDGE = 	[[x, x, x], 
-														[x, x, x], 
-														[x, x, x]];
-
-	private static final TestTileType[][] ONE_EDGE = 	[[o, o, o], 
-	                                                	 [x, x, x], 
-	                                                	 [x, x, x]];
-	
-	private static final TestTileType[][] TWO_EDGE = 	[[o, o, o], 
-	                                                 	 [x, x, x], 
-	                                                 	 [o, o, o]];
-	
-	private static final TestTileType[][] CORNER = 		[[o, o, o], 
-	                                                 	 [x, x, o], 
-	                                                 	 [x, x, o]];
-	
-	private static final TestTileType[][] THREE_EDGE = 	[[o, o, o], 
-	                                                 	 [x, x, o], 
-	                                                 	 [o, o, o]];
-	
-	private static final TestTileType[][] ALL_EDGE = 	[[o, o, o], 
-	                                                 	 [o, x, o], 
-	                                                 	 [o, o, o]];
-	
-
-	def "test"(ItemShape expected, TestTileType[][] tilePattern){
+	def "proper shape is identified"(ItemShape expected, TestTileType[][] tilePattern){
 		given:
 			GridHelper helper = new GridHelper();
 			Grid<Tile> grid = helper.createGrid(tilePattern)
 
 		when:
 			TilePainter manager = new TilePainter()
-			ItemShape actual = manager.getShape(grid.getItemAt(1, 1), grid)
+			ItemShape actual = manager.getDimensions(grid.getItemAt(1, 1), grid).getShape()
 
 		then:
 			expected == actual
 			
 		where:
 			expected 				| 	tilePattern
-			ItemShape.NO_EDGE		|	NO_EDGE
-			ItemShape.ONE_EDGE		|	ONE_EDGE
-			ItemShape.TWO_EDGE		|	TWO_EDGE
-			ItemShape.CORNER		|	CORNER
-			ItemShape.THREE_EDGE	|	THREE_EDGE
-			ItemShape.ALL_EDGE		|	ALL_EDGE
+			ItemShape.NO_EDGE		|	TestTileType.NO_EDGE
+			ItemShape.ONE_EDGE		|	TestTileType.ONE_EDGE
+			ItemShape.ONE_EDGE		|	TestTileType.ONE_EDGE_EAST
+			ItemShape.ONE_EDGE		|	TestTileType.ONE_EDGE_SOUTH
+			ItemShape.ONE_EDGE		|	TestTileType.ONE_EDGE_WEST
+			ItemShape.TWO_EDGE		|	TestTileType.TWO_EDGE
+			ItemShape.TWO_EDGE		|	TestTileType.TWO_EDGE_WEST
+			ItemShape.CORNER		|	TestTileType.CORNER
+			ItemShape.CORNER		|	TestTileType.CORNER_EAST
+			ItemShape.CORNER		|	TestTileType.CORNER_SOUTH
+			ItemShape.CORNER		|	TestTileType.CORNER_WEST
+			ItemShape.THREE_EDGE	|	TestTileType.THREE_EDGE
+			ItemShape.THREE_EDGE	|	TestTileType.THREE_EDGE_EAST
+			ItemShape.THREE_EDGE	|	TestTileType.THREE_EDGE_SOUTH
+			ItemShape.THREE_EDGE	|	TestTileType.THREE_EDGE_WEST
+			ItemShape.ALL_EDGE		|	TestTileType.ALL_EDGE
+	}
+	
+	def "proper rotation is identified"(GridDirection expected, TestTileType[][] tilePattern){
+		given:
+			GridHelper helper = new GridHelper();
+			Grid<Tile> grid = helper.createGrid(tilePattern)
+			
+		when:
+			TilePainter manager = new TilePainter()
+			GridDirection actual = manager.getDimensions(grid.getItemAt(1, 1), grid).getRotation()
+			
+		then:
+			expected == actual
+			
+			where:
+				expected 				| 	tilePattern
+				GridDirection.NORTH		|	TestTileType.NO_EDGE
+				GridDirection.NORTH		|	TestTileType.ONE_EDGE
+				GridDirection.EAST		|	TestTileType.ONE_EDGE_EAST
+				GridDirection.SOUTH		|	TestTileType.ONE_EDGE_SOUTH
+				GridDirection.WEST		|	TestTileType.ONE_EDGE_WEST
+				GridDirection.NORTH		|	TestTileType.TWO_EDGE
+				GridDirection.WEST		|	TestTileType.TWO_EDGE_WEST
+				GridDirection.NORTH		|	TestTileType.CORNER
+				GridDirection.EAST		|	TestTileType.CORNER_EAST
+				GridDirection.SOUTH		|	TestTileType.CORNER_SOUTH
+				GridDirection.WEST		|	TestTileType.CORNER_WEST
+				GridDirection.NORTH		|	TestTileType.THREE_EDGE
+				GridDirection.EAST		|	TestTileType.THREE_EDGE_EAST
+				GridDirection.SOUTH		|	TestTileType.THREE_EDGE_SOUTH
+				GridDirection.WEST		|	TestTileType.THREE_EDGE_WEST
+				GridDirection.NORTH		|	TestTileType.ALL_EDGE
 	}
 }

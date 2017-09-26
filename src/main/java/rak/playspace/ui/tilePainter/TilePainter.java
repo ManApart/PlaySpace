@@ -2,29 +2,30 @@ package rak.playspace.ui.tilePainter;
 
 import rak.playspace.model.Tile;
 import rak.playspace.power.Item;
+import rak.playspace.tilePainter.ConnectedNeighbors;
+import rak.playspace.tilePainter.ItemDimensions;
 import rak.utility.grid.Grid;
 import rak.utility.grid.GridDirection;
 
 public class TilePainter {
-	
-	public ItemShape getShape(Tile tile, Grid<Tile> grid){
+
+	public ItemDimensions getDimensions(Tile tile, Grid<Tile> grid){
 		if (tile == null || tile.getItem() == null){
-			return ItemShape.ALL_EDGE;
+			return null;
 		}
+		ConnectedNeighbors neighbors = createNeighbors(tile, grid);
 		
-		int matchingSideCount = countMatchingSides(tile, grid);
-		boolean isCorner = isCorner(tile, grid, matchingSideCount);
-		return ItemShape.determineShape(matchingSideCount, isCorner);
+		return new ItemDimensions(neighbors);
 	}
 
-	private int countMatchingSides(Tile tile, Grid<Tile> grid) {
-		int matchingSideCount = 0;
-		for (GridDirection direction : GridDirection.values()){
-			if (sideMatches(tile, grid, direction)){
-				matchingSideCount++;
+	public ConnectedNeighbors createNeighbors(Tile tile, Grid<Tile> grid) {
+		ConnectedNeighbors neighbors = new ConnectedNeighbors();
+		for (GridDirection direction : GridDirection.values()) {
+			if (sideMatches(tile, grid, direction)) {
+				neighbors.setConnected(direction, true);
 			}
 		}
-		return matchingSideCount;
+		return neighbors;
 	}
 
 	private boolean sideMatches(Tile tile, Grid<Tile> grid, GridDirection direction) {
@@ -36,14 +37,5 @@ public class TilePainter {
 		Tile neighborTile = grid.getNeighbor(tile, gridDirection);
 		return neighborTile != null ? neighborTile.getItem() : null;
 	}
-	
-	private boolean isCorner(Tile tile, Grid<Tile> grid, int matchingSideCount) {
-		if (matchingSideCount == 2){
-			boolean north = sideMatches(tile, grid, GridDirection.NORTH);
-			boolean south = sideMatches(tile, grid, GridDirection.SOUTH);
-			return (north != south);
-		}	
-		return false;
-	}
-	
+
 }
