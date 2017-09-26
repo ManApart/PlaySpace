@@ -9,14 +9,19 @@ public class Engine extends PoweredComponent implements Item {
 	public Engine(int powerProduced){
 		this.powerProduced = powerProduced;
 	}
-	
-	public void producePower(){
-		setPowerLevel(getPowerLevel() + powerProduced);
-	}
 
 	@Override
 	public PathingType getPathingType() {
 		return PathingType.DESTINATION;
+	}
+	
+	@Override
+	public boolean visuallyConnectsWith(Item north) {
+		return north instanceof Engine;
+	}
+	
+	public void producePower(){
+		setPowerLevel(getPowerLevel() + powerProduced);
 	}
 
 }

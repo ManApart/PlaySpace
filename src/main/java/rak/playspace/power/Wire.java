@@ -18,6 +18,11 @@ public class Wire extends PoweredComponent implements Item{
 	public PathingType getPathingType() {
 		return isOpen ? PathingType.OPEN : PathingType.BLOCKED;
 	}
+	
+	@Override
+	public boolean visuallyConnectsWith(Item north) {
+		return north instanceof Wire;
+	}
 
 	public float getConductivity() {
 		return conductivity;

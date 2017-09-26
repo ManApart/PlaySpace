@@ -15,5 +15,10 @@ public class Station extends PoweredComponent implements Item {
 	public PathingType getPathingType() {
 		return PathingType.DESTINATION;
 	}
+
+	@Override
+	public boolean visuallyConnectsWith(Item north) {
+		return north instanceof Station;
+	}
 	
 }
