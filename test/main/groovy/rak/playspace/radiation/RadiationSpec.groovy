@@ -2,6 +2,7 @@ package rak.playspace.radiation
 
 import rak.playspace.model.Tile
 import rak.utility.grid.Grid
+import rak.utility.grid.GridHelper
 import rak.utility.grid.GridSquare
 import spock.lang.Specification
 
@@ -18,8 +19,8 @@ class RadiationSpec extends Specification{
 				[f,r,f], 				
 				[f,f,f]
 			]
-			RadiationTestHelper helper = new RadiationTestHelper()
-			Grid<Tile> grid = helper.createTiles(tilePattern)
+			GridHelper helper = new GridHelper();
+			Grid<Tile> grid = helper.createGrid(tilePattern)
 			
 		when:
 			RadiationManager manager = new RadiationManager()
