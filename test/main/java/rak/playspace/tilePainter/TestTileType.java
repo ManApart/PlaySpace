@@ -2,10 +2,9 @@ package rak.playspace.tilePainter;
 
 import rak.playspace.model.Tile;
 import rak.playspace.power.Item;
-import rak.utility.grid.GridItem;
 import rak.utility.grid.GridItemBuilder;
 
-public enum TestTileType implements GridItemBuilder {
+public enum TestTileType implements GridItemBuilder<Tile> {
 	ITEM {
 		@Override
 		public Item getITem() {
@@ -22,7 +21,7 @@ public enum TestTileType implements GridItemBuilder {
 	public abstract Item getITem();
 	
 	@Override
-	public GridItem buildSquare() {
+	public Tile buildSquare() {
 		Tile tile = new Tile();
 
 		tile.setItem(getITem());
@@ -78,19 +77,19 @@ public enum TestTileType implements GridItemBuilder {
 											            {o, x, x}, 
 											            {o, o, o}};
 	
-	public static final TestTileType[][] THREE_EDGE = 	{{o, x, o}, 
-											        	 {o, x, o}, 
-											        	 {o, o, o}};
+	public static final TestTileType[][] THREE_EDGE = {{o, o, o}, 
+														{o, x, o}, 
+														{o, x, o}};
 	
-	public static final TestTileType[][] THREE_EDGE_EAST = 	{{o, o, o}, 
+	public static final TestTileType[][] THREE_EDGE_WEST = 	{{o, o, o}, 
 										  			       	 {o, x, x}, 
 															{o, o, o}};
 	
-	public static final TestTileType[][] THREE_EDGE_SOUTH = {{o, o, o}, 
-											    		      {o, x, o}, 
-															  {o, x, o}};
+	public static final TestTileType[][] THREE_EDGE_SOUTH = {{o, x, o}, 
+															{o, x, o}, 
+															{o, o, o}};
 	
-	public static final TestTileType[][] THREE_EDGE_WEST = 	{{o, o, o}, 
+	public static final TestTileType[][] THREE_EDGE_EAST = 	{{o, o, o}, 
 										        	  		 {x, x, o}, 
 															 {o, o, o}};
 	

@@ -10,7 +10,7 @@ import spock.lang.Specification
 
 class TilePainterSpec extends Specification {
 
-	def "proper shape is identified"(ItemShape expected, TestTileType[][] tilePattern){
+	def "proper shape of #expected is identified given tile pattern #tilePattern"(ItemShape expected, TestTileType[][] tilePattern){
 		given:
 			GridHelper helper = new GridHelper();
 			Grid<Tile> grid = helper.createGrid(tilePattern)
@@ -42,7 +42,7 @@ class TilePainterSpec extends Specification {
 			ItemShape.ALL_EDGE		|	TestTileType.ALL_EDGE
 	}
 	
-	def "proper rotation is identified"(GridDirection expected, TestTileType[][] tilePattern){
+	def "proper rotation of #expected is identified given tile pattern #tilePattern"(GridDirection expected, TestTileType[][] tilePattern){
 		given:
 			GridHelper helper = new GridHelper();
 			Grid<Tile> grid = helper.createGrid(tilePattern)

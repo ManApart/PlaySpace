@@ -9,7 +9,7 @@ public enum ItemShape {
 		@Override
 		public GridDirection determineRotation(ConnectedNeighbors neighbors){
 			for (GridDirection direction : GridDirection.values()){
-				if (neighbors.isConnected(direction)){
+				if (direction.isCardinal() && !neighbors.isConnected(direction)){
 					return direction;
 				}
 			}
@@ -20,9 +20,9 @@ public enum ItemShape {
 		@Override
 		public GridDirection determineRotation(ConnectedNeighbors neighbors){
 			if (neighbors.isConnected(GridDirection.NORTH)){ 
-				return GridDirection.NORTH; 
+				return GridDirection.WEST; 
 			}
-			return GridDirection.WEST;
+			return GridDirection.NORTH;
 		}
 	},
 	CORNER(2){
@@ -33,16 +33,16 @@ public enum ItemShape {
 		@Override
 		public GridDirection determineRotation(ConnectedNeighbors neighbors){
 			if (neighbors.isConnected(GridDirection.WEST) && neighbors.isConnected(GridDirection.NORTH)) {
-				return GridDirection.NORTH;
-			}
-			if (neighbors.isConnected(GridDirection.NORTH) && neighbors.isConnected(GridDirection.EAST)) {
-				return GridDirection.EAST;
-			}
-			if (neighbors.isConnected(GridDirection.EAST) && neighbors.isConnected(GridDirection.SOUTH)) {
 				return GridDirection.SOUTH;
 			}
-			if (neighbors.isConnected(GridDirection.SOUTH) && neighbors.isConnected(GridDirection.WEST)) {
+			if (neighbors.isConnected(GridDirection.NORTH) && neighbors.isConnected(GridDirection.EAST)) {
 				return GridDirection.WEST;
+			}
+			if (neighbors.isConnected(GridDirection.EAST) && neighbors.isConnected(GridDirection.SOUTH)) {
+				return GridDirection.NORTH;
+			}
+			if (neighbors.isConnected(GridDirection.SOUTH) && neighbors.isConnected(GridDirection.WEST)) {
+				return GridDirection.EAST;
 			}
 			return super.determineRotation(neighbors);
 		}
@@ -51,8 +51,8 @@ public enum ItemShape {
 		@Override
 		public GridDirection determineRotation(ConnectedNeighbors neighbors){
 			for (GridDirection direction : GridDirection.values()){
-				if (!neighbors.isConnected(direction)){
-					return direction;
+				if (neighbors.isConnected(direction)){
+					return direction.getInverse();
 				}
 			}
 			return super.determineRotation(neighbors);
@@ -77,7 +77,7 @@ public enum ItemShape {
 	public static ItemShape determineShape(ConnectedNeighbors neighbors) {
 		for (ItemShape itemShape : ItemShape.values()){
 			if (itemShape.contiguousSides == neighbors.getNumberOfConnectedNeighbors()){
-				if (itemShape.isCorner() == neighbors.isCorner() || !itemShape.isCorner()){
+				if (itemShape.isCorner() == neighbors.isCorner()){
 					return itemShape;
 				}
 			}

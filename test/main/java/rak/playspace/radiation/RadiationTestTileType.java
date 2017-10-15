@@ -1,10 +1,9 @@
 package rak.playspace.radiation;
 
 import rak.playspace.model.Tile;
-import rak.utility.grid.GridItem;
 import rak.utility.grid.GridItemBuilder;
 
-public enum RadiationTestTileType implements GridItemBuilder {
+public enum RadiationTestTileType implements GridItemBuilder<Tile> {
 	RADIATOR {
 		public Radiation createRadiation(RadiationType radType, int radiatorProductionLevel) {
 			Radiation radiation = new Radiation(radType);
@@ -33,7 +32,7 @@ public enum RadiationTestTileType implements GridItemBuilder {
 	public abstract Radiation createRadiation(RadiationType radType, int radiatorProductionLevel);
 	
 	@Override
-	public GridItem buildSquare() {
+	public Tile buildSquare() {
 		Tile tile = new Tile();
 
 		Radiator radiator = createRadiator();

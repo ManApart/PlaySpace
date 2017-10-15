@@ -1,6 +1,7 @@
 package rak.playspace.tilePainter;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import rak.utility.grid.GridDirection;
 
@@ -10,6 +11,16 @@ public class ConnectedNeighbors {
 	
 	public ConnectedNeighbors(){
 		neighbors = buildMap();
+	}
+	
+	@Override
+	public String toString(){
+		String message = "";
+		for (Entry<GridDirection, Boolean> neighbor : neighbors.entrySet()){
+			message += neighbor.getKey() + ": " + neighbor.getValue() + ", ";
+		}
+		
+		return message;
 	}
 
 	private HashMap<GridDirection, Boolean> buildMap() {
@@ -29,6 +40,19 @@ public class ConnectedNeighbors {
 	}
 	
 	public int getNumberOfConnectedNeighbors(){
+		int count = 0;
+		for (GridDirection direction : neighbors.keySet()){
+			if (direction.isCardinal()){
+				boolean isConnected = neighbors.get(direction);
+				if (isConnected){
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+	
+	public int getNumberOfConnectedNeighborsIncludingDiagonals(){
 		int count = 0;
 		for (boolean isConnected : neighbors.values()){
 			if (isConnected){
