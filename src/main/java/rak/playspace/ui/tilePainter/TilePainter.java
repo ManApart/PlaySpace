@@ -2,8 +2,6 @@ package rak.playspace.ui.tilePainter;
 
 import rak.playspace.model.Tile;
 import rak.playspace.power.Item;
-import rak.playspace.tilePainter.ConnectedNeighbors;
-import rak.playspace.tilePainter.ItemDimensions;
 import rak.utility.grid.Grid;
 import rak.utility.grid.GridDirection;
 

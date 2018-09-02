@@ -20,7 +20,7 @@ public class AtmosphereGrid {
 	}
 
 	private void createAtmosphereGrid(Grid<Tile> tiles) {
-		atmosphereGrid = new Grid<Atmosphere>(tiles.getSizeInOneDimension());
+		atmosphereGrid = new Grid<>(tiles.getSizeInOneDimension());
 		for (GridSquare<Tile> square : tiles.getAllSquares()){
 			atmosphereGrid.setAt(square.getItem().getAtmosphere(), square.getX(), square.getY());
 		}

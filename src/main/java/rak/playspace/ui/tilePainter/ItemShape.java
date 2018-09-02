@@ -1,6 +1,5 @@
 package rak.playspace.ui.tilePainter;
 
-import rak.playspace.tilePainter.ConnectedNeighbors;
 import rak.utility.grid.GridDirection;
 
 public enum ItemShape {
